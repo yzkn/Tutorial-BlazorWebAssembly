@@ -1,0 +1,37 @@
+@page "/item"
+
+<h1>Item (@items.Count(item => item.IsEnabled))</h1>
+
+<ul>
+    @foreach (var item in items)
+    {
+        <li>
+            <input type="checkbox" @bind="item.IsEnabled" />
+            <span>@item.Title</span>
+            <span>@item.Content</span>
+        </li>
+    }
+</ul>
+
+<input placeholder="title" @bind="newTitle" />
+<input placeholder="content" @bind="newContent" />
+<input placeholder="is_enabled" type="checkbox" @bind="newIsEnabled" />
+<button @onclick="AddItem">Add item</button>
+
+@code {
+    private IList<IItem> items = new List<IItem>();
+    private string newTitle;
+    private string newContent;
+    private bool newIsEnabled = true;
+
+    private void AddItem()
+    {
+        if (!string.IsNullOrWhiteSpace(newTitle))
+        {
+            items.Add(new IItem { Title = newTitle, Content = newContent, IsEnabled = newIsEnabled });
+            newTitle = string.Empty;
+            newContent = string.Empty;
+            newIsEnabled = true;
+        }
+    }
+}

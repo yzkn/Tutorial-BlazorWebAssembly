@@ -24,6 +24,24 @@ dotnet run
 
 [https://localhost:5000](https://localhost:5000)
 
+## Item の追加
+
+### ページの追加
+
+以下のページを追加
+
+- `Pages\Item.razor`
+
+以下のファイルを開き、ナビゲーションにメニュー項目を追加
+
+- `Shared\NavMenu.razor`
+
+### モデルの追加
+
+以下のファイルを追加
+
+- `Item.cs`
+
 ---
 
 Copyright (c) 2020 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
