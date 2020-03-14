@@ -18,13 +18,22 @@
 <input placeholder="is_enabled" type="checkbox" @bind="newIsEnabled" />
 <button @onclick="AddItem">Add item</button>
 
+@using Newtonsoft.Json
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
 @code {
     private IList<IItem> items = new List<IItem>();
     private string newTitle;
     private string newContent;
     private bool newIsEnabled = true;
 
-    private void AddItem()
+    protected override async Task OnInitializedAsync()
+    {
+        string jsonString = await localStorage.GetItemAsync<string>("items");
+        items = JsonConvert.DeserializeObject<List<IItem>>(jsonString);
+    }
+
+    private async Task AddItem()
     {
         if (!string.IsNullOrWhiteSpace(newTitle))
         {
@@ -32,6 +41,9 @@
             newTitle = string.Empty;
             newContent = string.Empty;
             newIsEnabled = true;
+
+            string jsonString = JsonConvert.SerializeObject(items);
+            await localStorage.SetItemAsync("items", jsonString);
         }
     }
 }

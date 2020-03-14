@@ -42,6 +42,25 @@ dotnet run
 
 - `Item.cs`
 
+## ローカルストレージを利用した永続化
+
+[Blazored/LocalStorage](https://github.com/Blazored/LocalStorage) をインストールして、ローカルストレージを利用した永続化を行う
+
+```ps
+$ dotnet add package Newtonsoft.Json
+$ dotnet add package Blazored.LocalStorage
+```
+
+- `Program.cs`
+
+```cs
+using Blazored.LocalStorage;
+
+            builder.Services.AddBlazoredLocalStorage();
+```
+
+- `Pages\Item.razor`
+
 ---
 
 Copyright (c) 2020 YA-androidapp(https://github.com/YA-androidapp) All rights reserved.
